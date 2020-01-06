@@ -2,13 +2,21 @@ const router = require('express').Router();
 
 const User = require('../models/user');
 
-router.post('/', async (req, res) => {
-  try {
-    const user = await User.create({ name: req.body.name });
+const helpers = require('../helpers');
 
-    res.json({ success: true, user });
+router.post('/', helpers.validateFields(['name']), async (req, res) => {
+  const {
+    name,
+  } = req.body;
+
+  try {
+    const user = await User.create({ name });
+
+    return res.json({ success: true, user });
   } catch (error) {
-    res.json({ error });
+    return res.status(500).json({
+      error: 'An internal error occurred',
+    });
   }
 });
 
