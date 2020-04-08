@@ -1,7 +1,7 @@
 const expect = require('expect');
 const faker = require('faker');
 
-const User = require('../../models/user');
+const { User } = require('../../models');
 
 describe('Tests User', () => {
   // Save correct data
