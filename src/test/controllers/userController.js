@@ -2,7 +2,7 @@ const request = require('supertest');
 const expect = require('expect');
 const faker = require('faker');
 
-const User = require('../../models/user');
+const { User } = require('../../models');
 
 const app = require('../../server');
 
