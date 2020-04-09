@@ -1,17 +1,19 @@
 const expect = require('expect');
 const faker = require('faker');
+const bcrypt = require('bcrypt');
 
 const { User } = require('../../models');
 
 describe('Tests User', () => {
   // Save correct data
-  const name = faker.name.findName();
+  const username = faker.internet.userName();
+  const email = faker.internet.email();
+  const password = faker.internet.password();
 
-  it('Should save the user to database', (done) => {
-    User.create({ name }).then((user) => {
-      expect(user.name === name);
+  it('Should save hashed password to database', async () => {
+    const user = await User.create({ username, email, password });
+    const passwordValid = await bcrypt.compare(password, user.password);
 
-      done();
-    });
+    expect(passwordValid).toBe(true);
   });
 });
