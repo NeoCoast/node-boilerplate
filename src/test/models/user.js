@@ -17,3 +17,31 @@ describe('Tests User', () => {
     expect(passwordValid).toBe(true);
   });
 });
+
+describe('validPassword', () => {
+  const username = faker.internet.userName();
+  const email = faker.internet.email();
+  const password = faker.internet.password();
+
+  let user;
+
+  before(async () => {
+    user = await User.create({
+      username,
+      email,
+      password,
+    });
+  });
+
+  describe('when passing wrong password', async () => {
+    it('expects false', async () => {
+      expect(await user.validPassword('badPassword')).toBe(false);
+    });
+  });
+
+  describe('when passing correct password', async () => {
+    it('expects true', async () => {
+      expect(await user.validPassword(password)).toBe(true);
+    });
+  });
+});
