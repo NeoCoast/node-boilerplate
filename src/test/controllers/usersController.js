@@ -66,8 +66,8 @@ describe('User Controller Tests', () => {
     });
 
     describe('when logged in', () => {
-      let token;
       let currentUser;
+      let cookie;
 
       before(async () => {
         const login = await api
@@ -78,14 +78,14 @@ describe('User Controller Tests', () => {
           });
 
         currentUser = login.body.user;
-        token = login.headers.token;
+        [cookie] = login.headers['set-cookie'].pop().split(';');
       });
 
       describe('when requesting own data', () => {
         it('should return user data', async () => {
           const res = await api
             .get(`/api/users/${currentUser.id}`)
-            .set('token', token)
+            .set('Cookie', cookie)
             .expect(200);
 
           expect(res.body.user).toMatchObject({
@@ -99,7 +99,7 @@ describe('User Controller Tests', () => {
         it('should return an error', async () => {
           await api
             .get('/api/users/0')
-            .set('token', token)
+            .set('Cookie', cookie)
             .expect(403);
         });
       });

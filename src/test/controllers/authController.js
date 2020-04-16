@@ -8,11 +8,11 @@ const app = require('../../server');
 
 const api = request(app);
 
-describe('login', () => {
-  const username = faker.internet.userName();
-  const email = faker.internet.email();
-  const password = faker.internet.password();
+const username = faker.internet.userName();
+const email = faker.internet.email();
+const password = faker.internet.password();
 
+describe('login', () => {
   describe('sending bad user data', () => {
     it('should return an error', async () => {
       api
@@ -34,7 +34,7 @@ describe('login', () => {
       });
     });
 
-    it('returns user data and token in header', async () => {
+    it('returns user data and cookie in header', async () => {
       const res = await api
         .post('/api/login')
         .send({
@@ -48,7 +48,46 @@ describe('login', () => {
         email,
       });
 
-      expect(res.headers.token).not.toBe(null);
+      const [cookie] = res.headers['set-cookie'].pop().split(';');
+      expect(cookie).not.toBe(null);
+    });
+  });
+});
+
+describe('logout', () => {
+  describe('when user isn\'t logged in', () => {
+    it('returns an error', async () => {
+      await api
+        .delete('/api/logout')
+        .expect(401);
+    });
+  });
+
+  describe('when user is logged in', () => {
+    let cookie;
+
+    before(async () => {
+      const login = await api
+        .post('/api/login')
+        .send({
+          username,
+          password,
+        });
+
+      [cookie] = login.headers['set-cookie'].pop().split(';');
+    });
+
+    it('user can\'t use authenticated endpoints', async () => {
+      await api
+        .delete('/api/logout')
+        .set('Cookie', cookie)
+        .expect(200);
+
+      const authenticatedEndpoint = await api
+        .delete('/api/logout')
+        .set('Cookie', cookie);
+
+      expect(authenticatedEndpoint.status).toBe(401);
     });
   });
 });

@@ -1,10 +1,10 @@
 const router = require('express').Router();
-const passport = require('passport');
 
 const { User } = require('../models');
 const validateFields = require('../middleware/validateFields');
+const ensureAuthenticated = require('../middleware/ensureAuthenticated');
 
-router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
+router.get('/:id', ensureAuthenticated, async (req, res) => {
   const currentUser = req.user;
   if (currentUser.id === parseInt(req.params.id, 10)) {
     return res.status(200).send({ user: currentUser });
