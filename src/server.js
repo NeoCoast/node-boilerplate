@@ -2,12 +2,26 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const passport = require('passport');
+const session = require('express-session');
+const uuid = require('uuid');
+
+const sessionStore = require('./config/sessionStore');
 
 require('dotenv').config();
 
 const app = express();
 
+app.use(session({
+  genid: (/* req */) => uuid.v4(),
+  secret: process.env.SECRET_KEY,
+  store: sessionStore,
+  resave: false,
+  proxy: true,
+  saveUninitialized: true,
+}));
+
 app.use(passport.initialize());
+app.use(passport.session());
 
 require('./config/passport');
 

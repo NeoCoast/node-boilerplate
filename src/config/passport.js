@@ -1,7 +1,5 @@
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
-const JWTstrategy = require('passport-jwt').Strategy;
-const ExtractJWT = require('passport-jwt').ExtractJwt;
 
 const { User } = require('../models');
 
@@ -21,16 +19,16 @@ passport.use(
   ),
 );
 
-passport.use(
-  new JWTstrategy({
-    secretOrKey: process.env.SECRET_KEY,
-    jwtFromRequest: ExtractJWT.fromHeader('token'),
-  }, async (token, done) => {
-    try {
-      const currentUser = await User.findOne({ where: { username: token.user.username } });
-      return done(null, currentUser);
-    } catch (error) {
-      return done(error);
-    }
-  }),
-);
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findOne({ where: { id } });
+    if (!user) return done(null, false);
+    return done(null, user);
+  } catch (err) {
+    return done(err);
+  }
+});
