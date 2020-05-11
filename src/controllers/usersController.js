@@ -1,21 +1,30 @@
 const router = require('express').Router();
 
 const { User } = require('../models');
+const validateFields = require('../middleware/validateFields');
 
-const helpers = require('../helpers');
-
-router.post('/', helpers.validateFields(['name']), async (req, res) => {
+router.post('/', validateFields(['username', 'email', 'password']), async (req, res) => {
   const {
-    name,
+    firstName,
+    lastName,
+    username,
+    email,
+    password,
   } = req.body;
 
   try {
-    const user = await User.create({ name });
+    const user = await User.create({
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+    });
 
-    return res.json({ success: true, user });
-  } catch (error) {
-    return res.status(500).json({
-      error: 'An internal error occurred',
+    return res.status(200).send({ user });
+  } catch (err) {
+    return res.status(500).send({
+      error: err.message,
     });
   }
 });
