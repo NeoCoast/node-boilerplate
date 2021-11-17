@@ -5,7 +5,7 @@ Boilerplate for Node.js applications
 
 - Environment: [Node.js](https://nodejs.org/en/) v16.13.0
 - Framework: [Express.js](https://expressjs.com/) v4.17.1
-- Test framework: [Mocha](https://mochajs.org/) v6.2.3
+- Test framework: [Mocha](https://mochajs.org/) v7.1.0
 - Database: [Sequelize v5.22.4](https://sequelize.org/v5/) (ORM) and [PostgreSQL](https://www.postgresql.org/) with [node-postgres](https://node-postgres.com/) v8.7.1
 
 ## Other features

@@ -9,6 +9,7 @@ const configurations = {
     database: 'boilerplate_dev',
     host: process.env.DB_HOST,
     dialect: 'postgres',
+    logging: false,
   },
   test: {
     username: process.env.DB_USERNAME,
@@ -24,6 +25,7 @@ const configurations = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: 'postgres',
+    logging: false,
   },
 };
 
