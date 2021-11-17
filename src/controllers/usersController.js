@@ -21,30 +21,32 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), async (req,
   return res.status(403).send('Forbidden');
 });
 
-router.post('/', validateInput(userIV, 'body'), async (req, res) => {
-  const {
-    firstName,
-    lastName,
-    username,
-    email,
-    password,
-  } = req.body;
-
-  try {
-    const user = await User.create({
+router.post('/',
+  (req, res, next) => validateInput(userIV, req.body, res, next),
+  async (req, res) => {
+    const {
       firstName,
       lastName,
       username,
       email,
       password,
-    });
+    } = req.body;
 
-    return res.status(200).send({
-      user: show(user),
-    });
-  } catch (err) {
-    return res.status(500).send({ error: err.message });
-  }
-});
+    try {
+      const user = await User.create({
+        firstName,
+        lastName,
+        username,
+        email,
+        password,
+      });
+
+      return res.status(200).send({
+        user: show(user),
+      });
+    } catch (err) {
+      return res.status(500).send({ error: err.message });
+    }
+  });
 
 export default router;

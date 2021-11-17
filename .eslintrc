@@ -5,8 +5,12 @@
         "node": true,
         "mocha": true
     },
+    "plugins": [
+        "security"
+    ],      
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:security/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
