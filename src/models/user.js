@@ -1,6 +1,6 @@
-const bcrypt = require('bcrypt');
+import { compare, hash } from 'bcrypt';
 
-module.exports = (sequelize, DataTypes) => {
+export default (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     firstName: DataTypes.STRING,
     lastName: DataTypes.STRING,
@@ -8,16 +8,17 @@ module.exports = (sequelize, DataTypes) => {
     email: DataTypes.STRING,
     password: DataTypes.STRING,
   }, {});
+
   User.associate = (/* models */) => {
-    // associations can be defined here
+    // associations should be defined here
   };
 
   User.prototype.validPassword = async function validPassword(password) {
-    return bcrypt.compare(password, this.password);
+    return compare(password, this.password);
   };
 
   User.addHook('beforeSave', 'encryptPassword', async (user) => {
-    const hashedPassword = await bcrypt.hash(user.password, 10);
+    const hashedPassword = await hash(user.password, 10);
     user.password = hashedPassword; // eslint-disable-line no-param-reassign
   });
 

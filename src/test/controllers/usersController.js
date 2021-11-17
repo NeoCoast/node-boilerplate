@@ -1,12 +1,11 @@
-const request = require('supertest');
-const expect = require('expect');
-const faker = require('faker');
+import supertest from 'supertest';
+import expect from 'expect';
+import faker from 'faker';
 
-const { User } = require('../../models');
+import { User } from '../../services/database.js';
+import app from '../../server.js';
 
-const app = require('../../server');
-
-const api = request(app);
+const api = supertest(app);
 
 describe('User Controller Tests', () => {
   describe('Create User', () => {
@@ -40,7 +39,7 @@ describe('User Controller Tests', () => {
         .send({})
         .expect(400);
 
-      expect(res.body.error.missingFields.length).not.toBe(0);
+      expect(res.body.error[0].params.missingProperty).toBe('username');
     });
   });
 

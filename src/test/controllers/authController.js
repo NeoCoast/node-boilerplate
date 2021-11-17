@@ -1,12 +1,11 @@
-const request = require('supertest');
-const expect = require('expect');
-const faker = require('faker');
+import supertest from 'supertest';
+import expect from 'expect';
+import faker from 'faker';
 
-const { User } = require('../../models');
+import { User } from '../../services/database.js';
+import app from '../../server.js';
 
-const app = require('../../server');
-
-const api = request(app);
+const api = supertest(app);
 
 describe('login', () => {
   const username = faker.internet.userName();

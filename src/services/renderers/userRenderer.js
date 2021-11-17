@@ -1,9 +1,9 @@
-const minimal = ({ id, username }) => ({
+export const minimal = ({ id, username }) => ({
   id,
   username,
 });
 
-const show = ({
+export const show = ({
   id,
   email,
   username,
@@ -16,5 +16,3 @@ const show = ({
   firstName,
   lastName,
 });
-
-module.exports = { minimal, show };

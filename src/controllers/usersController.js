@@ -1,22 +1,27 @@
-const router = require('express').Router();
-const passport = require('passport');
-const userRenderer = require('../services/renderers/userRenderer');
+import { Router } from 'express';
+import passport from 'passport';
 
-const { User } = require('../models');
-const validateFields = require('../middleware/validateFields');
+import { show } from '../services/renderers/userRenderer.js';
+
+import { User } from '../services/database.js';
+import userIV from './input-validators/users_body.js';
+import validateInput from '../middleware/validateInput.js';
+
+const router = Router();
 
 router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const currentUser = req.user;
+
   if (currentUser.id === parseInt(req.params.id, 10)) {
     return res.status(200).send({
-      user: userRenderer.show(currentUser),
+      user: show(currentUser),
     });
   }
 
   return res.status(403).send('Forbidden');
 });
 
-router.post('/', validateFields(['username', 'email', 'password']), async (req, res) => {
+router.post('/', validateInput(userIV, 'body'), async (req, res) => {
   const {
     firstName,
     lastName,
@@ -35,11 +40,11 @@ router.post('/', validateFields(['username', 'email', 'password']), async (req, 
     });
 
     return res.status(200).send({
-      user: userRenderer.show(user),
+      user: show(user),
     });
   } catch (err) {
     return res.status(500).send({ error: err.message });
   }
 });
 
-module.exports = router;
+export default router;

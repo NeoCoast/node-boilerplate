@@ -20,6 +20,14 @@
             "error", {
                "devDependencies": true
             }
+        ],
+        "import/extensions": [
+            "error",
+            "ignorePackages"
+        ],
+        "no-return-await": 0,
+        "no-console": [
+            "error"
         ]
     }
 }

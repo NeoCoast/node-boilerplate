@@ -1,4 +1,8 @@
-module.exports = {
+import 'dotenv/config';
+
+import logger from '../services/logger.js';
+
+const configurations = {
   development: {
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
@@ -7,12 +11,12 @@ module.exports = {
     dialect: 'postgres',
   },
   test: {
-    username: null,
-    password: null,
+    username: process.env.DB_USERNAME,
+    password: process.env.DB_PASSWORD,
     database: 'boilerplate_test',
     host: 'localhost',
     dialect: 'postgres',
-    logging: () => {},
+    logging: (msg) => logger.info(msg),
   },
   production: {
     username: process.env.DB_USERNAME,
@@ -22,3 +26,5 @@ module.exports = {
     dialect: 'postgres',
   },
 };
+
+export default configurations[process.env.NODE_ENV];
