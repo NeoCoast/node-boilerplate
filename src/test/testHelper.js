@@ -1,9 +1,5 @@
-const { sequelize } = require('../models');
+import { sequelize } from '../services/database.js';
 
-before(async () => {
-  await sequelize.sync();
-});
+before(async () => await sequelize.sync());
 
-after(async () => {
-  await sequelize.drop();
-});
+after(async () => await sequelize.drop());

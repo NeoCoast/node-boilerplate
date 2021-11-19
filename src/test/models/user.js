@@ -1,8 +1,8 @@
-const expect = require('expect');
-const faker = require('faker');
-const bcrypt = require('bcrypt');
+import { compare } from 'bcrypt';
+import expect from 'expect';
+import faker from 'faker';
 
-const { User } = require('../../models');
+import { User } from '../../services/database.js';
 
 describe('Tests User', () => {
   // Save correct data
@@ -12,7 +12,7 @@ describe('Tests User', () => {
 
   it('Should save hashed password to database', async () => {
     const user = await User.create({ username, email, password });
-    const passwordValid = await bcrypt.compare(password, user.password);
+    const passwordValid = await compare(password, user.password);
 
     expect(passwordValid).toBe(true);
   });

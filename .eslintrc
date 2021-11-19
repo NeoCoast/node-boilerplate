@@ -5,8 +5,12 @@
         "node": true,
         "mocha": true
     },
+    "plugins": [
+        "security"
+    ],      
     "extends": [
-        "airbnb-base"
+        "airbnb-base",
+        "plugin:security/recommended"
     ],
     "globals": {
         "Atomics": "readonly",
@@ -20,6 +24,14 @@
             "error", {
                "devDependencies": true
             }
+        ],
+        "import/extensions": [
+            "error",
+            "ignorePackages"
+        ],
+        "no-return-await": 0,
+        "no-console": [
+            "error"
         ]
     }
 }
