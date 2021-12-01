@@ -2,7 +2,7 @@ import passport from 'passport';
 import LocalStrategy from 'passport-local';
 import { Strategy as JWTstrategy, ExtractJwt as ExtractJWT } from 'passport-jwt';
 
-import { User } from '../services/database.js';
+import { User } from '#services/database.js';
 
 passport.use(
   new LocalStrategy(

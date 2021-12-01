@@ -3,8 +3,9 @@
 import 'dotenv/config';
 import http from 'http';
 
-import app from '../server.js';
-import logger from '../services/logger.js';
+import logger from '#services/logger.js';
+
+import app from '#server';
 
 const port = process.env.PORT || 3000;
 

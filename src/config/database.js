@@ -1,6 +1,6 @@
 import 'dotenv/config';
 
-import logger from '../services/logger.js';
+import logger from '#services/logger.js';
 
 const configurations = {
   development: {

@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-import logger from '../services/logger.js';
+import logger from '#services/logger.js';
 
 const validator = new Ajv({ allErrors: true, async: true });
 

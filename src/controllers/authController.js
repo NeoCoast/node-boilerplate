@@ -2,7 +2,7 @@ import { Router } from 'express';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
 
-import { show } from '../services/renderers/userRenderer.js';
+import { show } from '#services/renderers/userRenderer.js';
 
 const router = Router();
 

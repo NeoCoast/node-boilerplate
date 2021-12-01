@@ -2,8 +2,8 @@ import supertest from 'supertest';
 import expect from 'expect';
 import faker from 'faker';
 
-import { User } from '../../services/database.js';
-import app from '../../server.js';
+import app from '#server';
+import { User } from '#services/database.js';
 
 const api = supertest(app);
 
