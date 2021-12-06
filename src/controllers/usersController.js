@@ -1,11 +1,11 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-import { show } from '../services/renderers/userRenderer.js';
+import { show } from '#services/renderers/userRenderer.js';
+import { User } from '#services/database.js';
 
-import { User } from '../services/database.js';
+import validateInput from '#middleware/validateInput.js';
 import userIV from './input-validators/users_body.js';
-import validateInput from '../middleware/validateInput.js';
 
 const router = Router();
 

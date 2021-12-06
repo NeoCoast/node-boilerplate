@@ -33,5 +33,21 @@
         "no-console": [
             "error"
         ]
+    },
+    "settings": {
+        "import/resolver": {
+            "alias": {
+                "map": [
+                    ["#config", "./src/config"],
+                    ["#controllers", "./src/controllers"],
+                    ["#middleware", "./src/middleware"],
+                    ["#models", "./src/models"],
+                    ["#services", "./src/services"],
+                    ["#root", "./src/"],
+                    ["#server", "./src/server.js"]
+                ],
+                "extensions": [".js", ".jsx", ".json"]
+            }
+        }
     }
 }

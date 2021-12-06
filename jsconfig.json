@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "es2020",
+    "module": "es6",
+    "baseUrl": ".",
+    "paths": {
+      "#server": ["./src/server.js"],
+      "#config/*": ["./src/config/*"],
+      "#controllers/*": ["./src/controllers/*"],
+      "#middleware/*": ["./src/middleware/*"],
+      "#models/*": ["./src/models/*"],
+      "#services/*": ["./src/services/*"]
+    }
+  },
+  "exclude": ["node-modules"]
+}

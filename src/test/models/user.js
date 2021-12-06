@@ -2,7 +2,7 @@ import { compare } from 'bcrypt';
 import expect from 'expect';
 import faker from 'faker';
 
-import { User } from '../../services/database.js';
+import { User } from '#services/database.js';
 
 describe('Tests User', () => {
   // Save correct data
