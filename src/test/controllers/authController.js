@@ -1,11 +1,12 @@
 import supertest from 'supertest';
-import expect from 'expect';
-import faker from 'faker';
+import { expect } from 'expect';
+import { faker } from '@faker-js/faker';
 
 import app from '#server';
-import { User } from '#services/database.js';
+import { models } from '#models/index.js';
 
 const api = supertest(app);
+const { User } = models;
 
 describe('login', () => {
   const username = faker.internet.userName();

@@ -1,4 +1,4 @@
-import { sequelize } from '../services/database.js';
+import { sequelize } from '#models/index.js';
 
 before(async () => await sequelize.sync());
 

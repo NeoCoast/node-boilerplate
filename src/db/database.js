@@ -10,6 +10,7 @@ const configurations = {
     host: process.env.DB_HOST,
     dialect: 'postgres',
     logging: false,
+    port: process.env.DB_PORT,
   },
   test: {
     username: process.env.DB_USERNAME,
@@ -17,6 +18,7 @@ const configurations = {
     database: 'boilerplate_test',
     host: 'localhost',
     dialect: 'postgres',
+    port: process.env.DB_PORT,
     logging: (msg) => logger.info(msg),
   },
   production: {
@@ -25,6 +27,7 @@ const configurations = {
     database: process.env.DB_NAME,
     host: process.env.DB_HOST,
     dialect: 'postgres',
+    port: process.env.DB_PORT,
     logging: false,
   },
 };

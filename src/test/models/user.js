@@ -1,8 +1,10 @@
 import { compare } from 'bcrypt';
-import expect from 'expect';
-import faker from 'faker';
+import { expect } from 'expect';
+import { faker } from '@faker-js/faker';
 
-import { User } from '#services/database.js';
+import { models } from '#models/index.js';
+
+const { User } = models;
 
 describe('Tests User', () => {
   // Save correct data
