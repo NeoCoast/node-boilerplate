@@ -1,10 +1,9 @@
 import { Router } from 'express';
 import passport from 'passport';
 
-import { show } from '#services/renderers/userRenderer.js';
-import { User } from '#services/database.js';
-
 import validateInput from '#middleware/validateInput.js';
+import { createUser } from '#business/user.js';
+
 import userIV from './input-validators/users_body.js';
 
 const router = Router();
@@ -12,16 +11,15 @@ const router = Router();
 router.get('/:id', passport.authenticate('jwt', { session: false }), async (req, res) => {
   const currentUser = req.user;
 
-  if (currentUser.id === parseInt(req.params.id, 10)) {
-    return res.status(200).send({
-      user: show(currentUser),
-    });
+  if (currentUser.user.id === parseInt(req.params.id, 10)) {
+    return res.status(200).send(currentUser);
   }
 
   return res.status(403).send('Forbidden');
 });
 
-router.post('/',
+router.post(
+  '/',
   (req, res, next) => validateInput(userIV, req.body, res, next),
   async (req, res) => {
     const {
@@ -33,7 +31,7 @@ router.post('/',
     } = req.body;
 
     try {
-      const user = await User.create({
+      const user = await createUser({
         firstName,
         lastName,
         username,
@@ -41,12 +39,11 @@ router.post('/',
         password,
       });
 
-      return res.status(200).send({
-        user: show(user),
-      });
+      return res.status(200).send(user);
     } catch (err) {
       return res.status(500).send({ error: err.message });
     }
-  });
+  },
+);
 
 export default router;

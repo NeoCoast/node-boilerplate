@@ -32,19 +32,24 @@
         "no-return-await": 0,
         "no-console": [
             "error"
-        ]
+        ],
+        "no-useless-catch": 0,
+        "import/no-unresolved": 0
     },
     "settings": {
         "import/resolver": {
             "alias": {
                 "map": [
                     ["#config", "./src/config"],
-                    ["#controllers", "./src/controllers"],
+                    ["#routes", "./src/routes"],
                     ["#middleware", "./src/middleware"],
-                    ["#models", "./src/models"],
+                    ["#models", "./src/db/models"],
                     ["#services", "./src/services"],
                     ["#root", "./src/"],
-                    ["#server", "./src/server.js"]
+                    ["#server", "./src/server.js"],
+                    ["#dataaccess/*", "./src/dataaccess/*"],
+                    ["#business/*", "./src/business/*"],
+                    ["#helpers/*", "./src/helpers/*"]
                 ],
                 "extensions": [".js", ".jsx", ".json"]
             }
