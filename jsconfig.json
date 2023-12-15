@@ -4,12 +4,15 @@
     "module": "es6",
     "baseUrl": ".",
     "paths": {
-      "#server": ["./src/server.js"],
+      "#server": ["src/server.ts"],
       "#config/*": ["./src/config/*"],
-      "#controllers/*": ["./src/controllers/*"],
+      "#routes/*": ["./src/routes/*"],
       "#middleware/*": ["./src/middleware/*"],
-      "#models/*": ["./src/models/*"],
-      "#services/*": ["./src/services/*"]
+      "#models/*": ["src/db/models/*"],
+      "#services/*": ["./src/services/*"],
+      "#dataaccess/*": ["./src/dataaccess/*"],
+      "#business/*": ["./src/business/*"],
+      "#helpers/*": ["./src/helpers/*"]
     }
   },
   "exclude": ["node-modules"]

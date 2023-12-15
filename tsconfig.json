@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "target": "es6",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "dist",
+    "baseUrl": ".",
+    "paths": {
+      "@server": ["./src/server.ts"],
+      "@config/*": ["./src/config/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@middleware/*": ["./src/middleware/*"],
+      "@services/*": ["./src/services/*"],
+      "@dataaccess/*": ["./src/dataaccess/*"],
+      "@business/*": ["./src/business/*"],
+      "@helpers/*": ["./src/helpers/*"],
+      "@test/*": ["test/*"],
+      "@models/*": ["./src/db/models/*"],
+    }
+  },
+  "include": [
+    "src/**/**/*","test",".sequelizerc"
+  ],
+}

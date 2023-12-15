@@ -1,6 +1,0 @@
-
-{
-  "package": "../package.json",
-  "timeout": 10000,
-  "file": ["src/test/testHelper.js"]
-}
